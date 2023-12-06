@@ -26,9 +26,9 @@ class AuthController extends Controller
             $user->save();
 
             if ($user) {
-                return $this->apiResponse([], "User added, please verify your account", 201);
+                return $this->apiResponse([], __("user.auth.user_added"), 201);
             } else {
-                return $this->apiResponse([], "Not able to create a user", 501);
+                return $this->apiResponse([], __("user.auth.not_able_to_create_user"), 501);
             }
         } catch (\Throwable $th) {
             return $this->apiResponse([], $th->getMessage(), 500);
@@ -43,9 +43,9 @@ class AuthController extends Controller
             $data = [
                 "user_id" => $user->id
             ];
-            return $this->apiResponse($data, "Logged in, please verify your account", 200);
+            return $this->apiResponse($data, __("user.auth.logged_in"), 200);
         } else {
-            return $this->apiResponse([], "User not exist", 404);
+            return $this->apiResponse([], __("user.auth.user_not_exist"), 404);
         }
     }
 
@@ -54,7 +54,7 @@ class AuthController extends Controller
         try {
             $user = User::where(['id' => $request->id, 'phone' => $request->phone, 'country_code' => $request->country_code])->first();
             if (!$user) {
-                return $this->apiResponse([], "User not exist", 404);
+                return $this->apiResponse([], __("user.auth.user_not_exist"), 404);
             }
 
             if (!$user_token = JWTAuth::fromUser($user)) {
@@ -71,7 +71,7 @@ class AuthController extends Controller
                 "user" => $user
             ];
 
-            return $this->apiResponse($data, "Logged in successfuly", 200);
+            return $this->apiResponse($data, __("user.auth.logged_in_successfuly"), 200);
         } catch (\Throwable $th) {
             return $this->apiResponse([], $th->getMessage(), 500);
         }
@@ -81,7 +81,7 @@ class AuthController extends Controller
     {
         try {
             auth()->guard('api')->logout();
-            return $this->apiResponse([], "Logged out", 200);
+            return $this->apiResponse([], __("user.auth.logged_out"), 200);
         } catch (\Throwable $th) {
             return $this->apiResponse([], $th->getMessage(), 500);
         }

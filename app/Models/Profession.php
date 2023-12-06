@@ -6,11 +6,11 @@ use Astrotomic\Translatable\Translatable;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EstateType extends Model
+class Profession extends Model
 {
     use Translatable;
 
-    protected $table = 'estates_types';
+    protected $table = 'professions';
     protected $guarded = [];
 
     protected $translatedAttributes = ['name'];

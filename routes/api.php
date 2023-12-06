@@ -13,6 +13,8 @@ Route::get('/ttt', function () {
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 Route::post('/confirm-login', 'AuthController@confirmCode');
+Route::get('/estates/types', 'HomeController@getEstatesTypes');
+Route::get('/professions', 'HomeController@getProfessions');
 
 Route::middleware('UserAuthMiddleware:api')->group(function () {
     Route::post('/me', 'AuthController@me');
